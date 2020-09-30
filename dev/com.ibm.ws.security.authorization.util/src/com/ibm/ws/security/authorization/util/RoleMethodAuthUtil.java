@@ -45,15 +45,31 @@ public class RoleMethodAuthUtil {
 
         } else { // try RolesAllowed
             RolesAllowed rolesAllowed = getRolesAllowed(method);
+//            if (rolesAllowed != null) {
+//
+//                String[] theseroles = rolesAllowed.value();
+//                if (LOG.isLoggable(Level.FINEST)) {
+//                    LOG.log(Level.FINEST, "found RolesAllowed in method: {} " + method.getName(),
+//                            new Object[] { theseroles });
+//                }
+//                checkAuthentication(principal);
+//                return Stream.of(theseroles).anyMatch(isUserInRoleFunction);
             if (rolesAllowed != null) {
-
                 String[] theseroles = rolesAllowed.value();
                 if (LOG.isLoggable(Level.FINEST)) {
                     LOG.log(Level.FINEST, "found RolesAllowed in method: {} " + method.getName(),
                             new Object[] { theseroles });
                 }
-                checkAuthentication(principal);
-                return Stream.of(theseroles).anyMatch(isUserInRoleFunction);
+                System.out.println("theseroles=");
+                for (String role : theseroles) {
+                    System.out.print(role);
+                }
+                boolean allowed = Stream.of(theseroles).anyMatch(isUserInRoleFunction);
+                System.out.println("allowed=" + allowed);
+                if (allowed)
+                    return true;
+                checkAuthentication(principal); // throws UnauthenticatedException if not authenticated
+                return false; // authenticated, but not authorized
             } else {
                 boolean permitAll = getPermitAll(method);
                 if (permitAll) {
@@ -82,14 +98,30 @@ public class RoleMethodAuthUtil {
         } else { // try RolesAllowed
 
             RolesAllowed rolesAllowed = cls.getAnnotation(RolesAllowed.class);
+//            if (rolesAllowed != null) {
+//                String[] theseroles = rolesAllowed.value();
+//                if (LOG.isLoggable(Level.FINEST)) {
+//                    LOG.log(Level.FINEST, "found RolesAllowed in class level: {} " + cls.getName(),
+//                            new Object[] { theseroles });
+//                }
+//                checkAuthentication(principal);
+//                return Stream.of(theseroles).anyMatch(isUserInRoleFunction);
             if (rolesAllowed != null) {
                 String[] theseroles = rolesAllowed.value();
                 if (LOG.isLoggable(Level.FINEST)) {
-                    LOG.log(Level.FINEST, "found RolesAllowed in class level: {} " + cls.getName(),
+                    LOG.log(Level.FINEST, "found RolesAllowed in method: {} " + cls.getName(),
                             new Object[] { theseroles });
                 }
-                checkAuthentication(principal);
-                return Stream.of(theseroles).anyMatch(isUserInRoleFunction);
+                System.out.println("theseroles=");
+                for (String role : theseroles) {
+                    System.out.print(role);
+                }
+                boolean allowed = Stream.of(theseroles).anyMatch(isUserInRoleFunction);
+                System.out.println("allowed=" + allowed);
+                if (allowed)
+                    return true;
+                checkAuthentication(principal); // throws UnauthenticatedException if not authenticated
+                return false; // authenticated, but not authorized
             } else {
                 // if no annotations on method or class (or if class has @PermitAll), return true;
                 return true;
