@@ -50,6 +50,7 @@ import com.ibm.ws.jaxrs20.fat.resourcealgorithm.SearchPolicyTest;
 import com.ibm.ws.jaxrs20.fat.resourceinfo.ResourceInfoTest;
 import com.ibm.ws.jaxrs20.fat.response.ResponseAPITest;
 import com.ibm.ws.jaxrs20.fat.restmetrics.RestMetricsTest;
+import com.ibm.ws.jaxrs20.fat.rolesAllowed.RolesAllowedTest;
 import com.ibm.ws.jaxrs20.fat.security.annotations.SecurityAnnotationsTest;
 import com.ibm.ws.jaxrs20.fat.security.ssl.SecuritySSLTest;
 import com.ibm.ws.jaxrs20.fat.securitycontext.CustomSecurityContextTest;
@@ -109,6 +110,7 @@ import componenttest.rules.repeater.RepeatTests;
                 ResourceInfoTest.class,
                 ResponseAPITest.class,
                 RestMetricsTest.class,
+                RolesAllowedTest.class,
                 SameClassAsProviderAndResourceTest.class,
                 SameClassInGetClassesAndGetSingletonsTest.class,
                 SearchPolicyTest.class,
