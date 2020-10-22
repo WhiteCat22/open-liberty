@@ -53,4 +53,15 @@ public class RolesAllowedTestServlet extends FATServlet {
 
         client.close();
     }
+
+    @Test
+    public void testNotAllowed() throws Exception {
+        Response response = null;
+        WebTarget t = client.target(endpoint + "admin");
+
+        response = t.request().get();
+        assertEquals(401, response.getStatus());
+
+        client.close();
+    }
 }

@@ -15,12 +15,19 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@RolesAllowed("User")
+@RolesAllowed({"User", "Admin"})
 @Path("RolesAllowedResource")
 public class RolesAllowedResource {
 
     @GET
     public Response get() {
+        return Response.ok().build();
+    }
+
+    @GET
+    @RolesAllowed("Admin")
+    @Path("admin")
+    public Response admin() {
         return Response.ok().build();
     }
 }

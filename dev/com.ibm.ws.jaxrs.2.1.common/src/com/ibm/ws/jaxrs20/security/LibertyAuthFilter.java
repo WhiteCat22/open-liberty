@@ -83,6 +83,7 @@ public class LibertyAuthFilter implements ContainerRequestFilter {
     private void handleMessage(Message message) throws UnauthenticatedException{
         SecurityContext jaxrsSecurityContext = message.get(SecurityContext.class);
         if (jaxrsSecurityContext != null && jaxrsSecurityContext instanceof SecurityContext) {
+            System.out.println("handleMessage() - if");
             Method method = getTargetMethod(message);
             if (RoleMethodAuthUtil.parseMethodSecurity(method,
                                                        jaxrsSecurityContext.getUserPrincipal(),
@@ -93,6 +94,7 @@ public class LibertyAuthFilter implements ContainerRequestFilter {
             HttpServletRequest req = (HttpServletRequest) message.get(AbstractHTTPDestination.HTTP_REQUEST);
             Method method = MessageUtils.getTargetMethod(message).orElseThrow(() -> 
                 new AccessDeniedException("Method is not available : Unauthorized"));
+            System.out.println("handleMessage() - else");
             if (RoleMethodAuthUtil.parseMethodSecurity(method,
                                                        req.getUserPrincipal(),
                                                        s -> req.isUserInRole(s))) {

@@ -60,6 +60,7 @@ public class RoleMethodAuthUtil {
                     LOG.log(Level.FINEST, "found RolesAllowed in method: {} " + method.getName(),
                             new Object[] { theseroles });
                 }
+                System.out.println("predicate=" + isUserInRoleFunction.toString());
                 System.out.println("theseroles=");
                 for (String role : theseroles) {
                     System.out.print(role);
@@ -112,6 +113,7 @@ public class RoleMethodAuthUtil {
                     LOG.log(Level.FINEST, "found RolesAllowed in method: {} " + cls.getName(),
                             new Object[] { theseroles });
                 }
+                System.out.println("predicate=" + isUserInRoleFunction.toString());
                 System.out.println("theseroles=");
                 for (String role : theseroles) {
                     System.out.print(role);
