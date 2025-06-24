@@ -24,4 +24,11 @@ public class SimpleSSLResource {
         System.out.println("Hello from SimpleSSLResource!");
         return "Hello World!";
     }
+    
+    @GET
+    @Path("echo2")
+    public String hello2() {
+        System.out.println("Hello from SimpleSSLResource!");
+        return "Hello World!";
+    }
 }

@@ -66,11 +66,11 @@ public class SimpleSSLMultipleServersClientTestServlet extends FATServlet {
         assertEquals("Hello World!", response.readEntity(String.class));
     }
     
-//    @Test
+    @Test
     public void testSimpleSSLRequestToSecondServerWebTarget() {
         client = ClientBuilder.newClient();
         Response response = client.target(SERVER_CONTEXT_ROOT)
-                        .path("echo")
+                        .path("echo2")
                         .request(MediaType.TEXT_PLAIN_TYPE)
                         .get();
         assertEquals(200, response.getStatus());
